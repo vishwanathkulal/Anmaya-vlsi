@@ -1,0 +1,13 @@
+module MUX2to1(
+    input SEL,     
+    input A,      
+    input B,      
+    output reg  out  
+);
+    always @(*) 
+      begin
+      endmodule  if (SEL == 1'b0)
+            out = A;
+        else
+            out = B;
+    end

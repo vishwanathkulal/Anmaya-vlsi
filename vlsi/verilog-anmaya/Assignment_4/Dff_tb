@@ -1,0 +1,29 @@
+module dff_TEST;
+    reg clk, reset, sel, D;
+    wire Q;
+
+    dff uut (
+        .clk(clk),
+      .reset(reset),
+        .sel(sel),
+      .D(D),
+      .Q(Q)
+    );
+
+    initial clk = 0;
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("dff_loop.vcd");
+      $dumpvars(0, dff_TEST);
+      $monitor("Time = %0t | reset = %b | sel = %b | D = %b | Q = %b", 
+             $time, reset, sel, D, Q);
+        reset = 1; sel = 0; D = 0; #12;
+        reset = 0;
+        sel = 1; D = 1; #10;
+        sel = 0;       #20;
+        sel = 1; D = 0; #10;
+        sel = 0;       #20;
+        $finish;
+    end
+endmodule

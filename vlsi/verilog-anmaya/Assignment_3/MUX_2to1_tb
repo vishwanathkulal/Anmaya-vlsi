@@ -1,0 +1,25 @@
+module MUX2to1_TEST;
+    reg A, B, SEL;
+    wire out;
+
+
+    MUX2to1 uut (
+      .SEL(SEL),
+      .A(A),
+      .B(B),
+      .out(out)
+    );
+
+    initial begin
+        $dumpfile("mux2to1.vcd");
+      $dumpvars(0, MUX2to1_TEST );
+
+        A = 0; B = 1;
+        SEL = 0;
+        #10 SEL = 1;
+        A = 1; B = 0;
+        SEL = 0;
+        #10 SEL = 1; 
+        #10 $finish;
+    end
+endmodule

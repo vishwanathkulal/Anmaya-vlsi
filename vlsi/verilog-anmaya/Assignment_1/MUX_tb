@@ -1,0 +1,26 @@
+module MUX_TEST();
+  reg [1:0] SEL;   
+  reg [3:0] I;
+  wire OUT;
+
+  MUX_4to1 u0 (
+    .SEL(SEL),
+    .I(I),
+    .out(OUT)
+  );
+  
+  initial begin
+    $dumpfile("mux.vcd");
+    $dumpvars(0, tb_mux);
+    I = 4'b1011;
+    SEL = 2'b00;
+    $display("%b   %b = %b", SEL, I, OUT); 
+    #10 SEL = 2'b01;
+    $display("%b   %b -> %b", SEL, I, OUT);
+    #10 SEL = 2'b10;
+    $display("%b   %b -> %b", SEL, I, OUT);
+    #10 SEL = 2'b11;
+    $display("%b   %b -> %b", SEL, I, OUT);
+    #10 $finish;
+  end
+endmodule

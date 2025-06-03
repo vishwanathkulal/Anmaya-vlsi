@@ -1,0 +1,26 @@
+module UpDown_Counter_Test;
+    reg clk;
+    reg reset;
+    reg up_down;
+  wire [3:0] count;
+
+    UpDown_Counter uut (
+      .clk(clk),
+      .reset(reset),
+      .up_down(up_down),
+      .count(count)
+    );
+
+    initial clk = 0;
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("updown_counter.vcd");
+      $dumpvars(0, UpDown_Counter_Test);
+
+        reset = 1;
+        #10 reset = 0; up_down= 1;
+        #50 up_down= 0;
+        #50 $finish;
+    end
+endmodule
